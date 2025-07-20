@@ -6,17 +6,14 @@
 
 ## 🛠️ TECHNOLOGY & PLATFORMS UTILIZED
 
-- `Wireshark:`</br>
+- [`Wireshark:`](https://www.wireshark.org/download.html)</br>
   Core tool used for capturing and analyzing network traffic across various protocols.
 
-- `VirtualBox:`</br>
+- [`VirtualBox:`](https://www.virtualbox.org/)</br>
   Hosted multiple isolated virtual machines for safely simulating real-world networking environments and security attacks.
 
-- `Ubuntu VM 1:`</br>
-  
-  
-- `Ubuntu VM 2:`</br>
-  
+- [`Ubuntu 22.04:`](https://releases.ubuntu.com/jammy/)</br>
+  Deployed on two separate virtual machines—one configured as the attacker/client and the other as the server/analyzer.
 
 ## OBJECTIVE
 
@@ -24,7 +21,7 @@ This project involved the design and execution of a comprehensive series of netw
 
 ## 📜 TABLE OF CONTENTS
 
-- [`TELNET TRAFFIC`](#telnet-traffic)
+- [`TELNET TRAFFIC`](TELNET-TRAFFIC)
 - [`SSH TRAFFIC`](ssh-traffic)
 - [`TLS/SSL HANDSHAKE`](tlsssl-handshake)
 - [`TCP 3-WAY HANDSHAKE`](tcp-3-way-handshake)
@@ -32,10 +29,11 @@ This project involved the design and execution of a comprehensive series of netw
 - [`ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK`](arp-spoofing--man-in-the-middle-attack)
 - [`CREDENTIAL LEAKAGE`](credential-leakage)
 - [`DOS/DDOS ATTACK SIMULATION`](dosddos-attack-simulation)
-</br>
-<img width="1340" height="120" alt="telnet drawio (1)" src="https://github.com/user-attachments/assets/9f6ddb39-ad05-4e48-8bc9-64ee20a0c49f" />
 
-## TELNET TRAFFIC - `Port 23`
+</br>
+<img width="1340" height="120" alt="telnet drawio (1)" src="https://github.com/user-attachments/assets/0cdb9c57-472a-4f01-a4e1-3496894d7533" />
+
+## TELNET TRAFFIC
 
 ### Step 1: Set Up the `Telnet Server` (VM 2)
 
@@ -99,6 +97,10 @@ The Telnet session captured in Wireshark demonstrates the inherent insecurity of
 <img width="863" height="489" alt="Lab 55" src="https://github.com/user-attachments/assets/a438edd4-b14d-4fc6-9353-d354d4e0c40f" />
 
 ---
+</br>
+<img width="1340" height="120" alt="ssh drawio (1)" src="https://github.com/user-attachments/assets/5462b9be-b3c6-4b7a-b890-54779ccd3e43" />
+
+## SSH TRAFFIC
 
 
 
