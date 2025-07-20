@@ -352,6 +352,122 @@ The ARP spoofing was successful because the victim’s ARP cache was tricked int
 
 ---
 
+## CREDENTIAL LEAKAGE
+
+### Step 1: Install and Configure `Apache` with Basic Authentication on the `Server VM`
+
+- ### Update package lists and install Apache:
+```bash
+sudo apt update
+sudo apt install apache2 -y
+```
+
+- ### Install Apache utilities to manage authentication:
+```bash
+sudo apt install apache2-utils -y
+```
+
+- ### Create a secure directory and set up a username/password for basic authentication:
+```bash
+sudo mkdir /var/www/html/secure
+sudo htpasswd -c /etc/apache2/.htpasswd test
+```
+
+### *When prompted, enter a new password.*
+
+- ### Configure Apache to protect the directory using Basic Auth by creating a config file:
+```bash
+sudo bash -c 'echo "<Directory /var/www/html/secure>
+    AuthType Basic
+    AuthName \"Restricted Content\"
+    AuthUserFile /etc/apache2/.htpasswd
+    Require valid-user
+</Directory>" > /etc/apache2/conf-available/secure.conf'
+```
+
+- ### Enable the new configuration and reload Apache to apply changes:
+```bash
+sudo a2enconf secure
+sudo systemctl reload apache2
+```
+
+---
+
+### Step 2: Install and Start FTP Server `VM 2` (Server)
+
+- ### Install the `vsftpd` FTP server:
+```bash
+sudo apt install vsftpd -y
+```
+
+- ### Start the FTP Service:
+```bash
+sudo systemctl start vsftpd
+```
+
+---
+
+### Step 3: Prepare the `Client` for Testing
+
+- ### Install curl to simulate HTTP requests with credentials:
+```bash
+sudo apt update
+sudo apt install curl -y
+```
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 4: Simulate HTTP Basic Authentication Login from the `Client`
+
+- ### Execute a `curl` command to access the protected directory with credentials:
+```bash
+curl --user test:8000 http://10.10.10.50/secure/
+```
+
+<img width="644" height="272" alt="Lab 31" src="https://github.com/user-attachments/assets/167da73d-98da-4378-a018-bf7f0878570e" />
+
+---
+
+### Step 6: Simulate FTP Login from the `Client`
+
+- ### Connect to the FTP Server:
+```bash
+curl --user test:8000 http://10.10.10.50/secure/
+```
+
+<img width="328" height="180" alt="Lab 32" src="https://github.com/user-attachments/assets/f3a741d9-13a7-4540-9b02-bdeb4a068543" />
+
+---
+
+### Step 3: Analyze the `Credential Leakage` in Wireshark
+
+- ### Apply the display filter: `http.authorization`
+  
+<img width="1420" height="383" alt="Lab 35" src="https://github.com/user-attachments/assets/2fa028ac-bf60-4938-be0a-492db79b3879" /></br>
+
+<img width="944" height="540" alt="Lab 36" src="https://github.com/user-attachments/assets/9582cba1-c8ec-42a1-8307-a24c3d079086" /></br>
+
+- ### Apply the display filter: `ftp.request.command == "USER"`
+
+<img width="1422" height="286" alt="Lab 34" src="https://github.com/user-attachments/assets/881b98e5-53d5-45c2-b583-e65427c0b1a7" /></br>
+
+<img width="945" height="357" alt="Lab 37" src="https://github.com/user-attachments/assets/ab4d44df-aedd-4ad8-9ce7-afbdc2881bce" /></br>
+
+This simulation demonstrates how credentials sent via `HTTP Basic Authentication` and `FTP` are transmitted in plaintext (or easily decoded) over the network, making them vulnerable to interception. Capturing this traffic with Wireshark clearly shows usernames and passwords, highlighting the need for secure protocols such as HTTPS and SFTP.
+
+---
+
+
+
+
+
+
+
+
+
+
+
 
 
 
