@@ -32,8 +32,10 @@ This project involved the design and execution of a comprehensive series of netw
 - [`ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK`](arp-spoofing--man-in-the-middle-attack)
 - [`CREDENTIAL LEAKAGE`](credential-leakage)
 - [`DOS/DDOS ATTACK SIMULATION`](dosddos-attack-simulation)
+</br>
+<img width="1340" height="120" alt="telnet drawio (1)" src="https://github.com/user-attachments/assets/9f6ddb39-ad05-4e48-8bc9-64ee20a0c49f" />
 
-## TELNET TRAFFIC
+## TELNET TRAFFIC - `Port 23`
 
 ### Step 1: Set Up the `Telnet Server` (VM 2)
 
