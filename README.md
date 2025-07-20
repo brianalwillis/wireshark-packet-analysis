@@ -213,6 +213,8 @@ In our TLS/SSL handshake capture, we successfully observed the full negotiation 
 
 ---
 
+<img width="1340" height="120" alt="tcp 3-way drawio" src="https://github.com/user-attachments/assets/e2d6b881-439e-48e1-9ed8-c2259e661019" />
+
 ## TCP 3-WAY HANDSHAKE
 
 ### Step 1: Install the Required Tools
