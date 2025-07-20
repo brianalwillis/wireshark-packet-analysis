@@ -25,14 +25,14 @@ This project involved the design and execution of a comprehensive series of netw
 
 ## 📜 TABLE OF CONTENTS
 
-- [`TELNET TRAFFIC`](TELNET-TRAFFIC)
-- [`SSH TRAFFIC`](SSH-TRAFFIC)
-- [`TLS/SSL HANDSHAKE`](tlsssl-handshake)
-- [`TCP 3-WAY HANDSHAKE`](tcp-3-way-handshake)
-- [`DNS TUNNELING`](dns-tunneling)
-- [`ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK`](arp-spoofing--man-in-the-middle-attack)
-- [`CREDENTIAL LEAKAGE`](credential-leakage)
-- [`DoS ATTACK SIMULATION`](dosddos-attack-simulation)
+- [TELNET TRAFFIC](#telnet-traffic)
+- [SSH TRAFFIC](#ssh-traffic)
+- [TLS/SSL HANDSHAKE](#tlsssl-handshake)
+- [TCP 3-WAY HANDSHAKE](#tcp-3-way-handshake)
+- [DNS TUNNELING](#dns-tunneling)
+- [ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK](#arp-spoofing--man-in-the-middle-attack)
+- [CREDENTIAL LEAKAGE](#credential-leakage)
+- [DOS ATTACK SIMULATION](#dos-attack-simulation)
 
 ---
 
