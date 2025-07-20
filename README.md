@@ -308,6 +308,8 @@ During the simulation, Wireshark captured multiple DNS query packets originating
 
 ---
 
+<img width="1340" height="120" alt="arp drawio (1)" src="https://github.com/user-attachments/assets/138ff4a4-09bb-401a-8aa3-937ec9518e38" />
+
 ## ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK
 
 ### Step 1: Set Up the `Client VM`
@@ -332,9 +334,9 @@ sudo arpspoof -i enp0s3 -t 10.10.10.100 10.10.10.50
 sudo arpspoof -i enp0s3 -t 10.10.10.50 10.10.10.100
 ```
 
--### Display the current ARP table with `arp -n`:
+- ### Display the current ARP table with `arp -n`:
 
-<img width="723" height="182" alt="Lab 48" src="https://github.com/user-attachments/assets/50fe0e47-7049-4dcb-b1fa-cc6870792245" />
+<img width="723" height="182" alt="Lab 48" src="https://github.com/user-attachments/assets/50fe0e47-7049-4dcb-b1fa-cc6870792245" /></br>
 
 ### *The current ARP table shows that the `Server VM` associates the IP `10.10.10.100` (the sender) with the attacker's MAC address `08:00:27:a4:29:a6`.*
 
@@ -344,7 +346,7 @@ sudo arpspoof -i enp0s3 -t 10.10.10.50 10.10.10.100
 
 - ### Apply the display filter: `arp`
 
-<img width="1068" height="887" alt="Lab 47" src="https://github.com/user-attachments/assets/a19037e5-831b-4efe-8d28-40819f4a32df" />
+<img width="1068" height="887" alt="Lab 47" src="https://github.com/user-attachments/assets/a19037e5-831b-4efe-8d28-40819f4a32df" /></br>
 
 The ARP spoofing was successful because the victim’s ARP cache was tricked into associating the attacker’s MAC address with the IP address `10.10.10.100`. This allows the attacker to intercept or alter network traffic between the victim and the legitimate sender, effectively enabling a `man-in-the-middle` (MITM) attack.
 
