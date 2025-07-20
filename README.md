@@ -460,7 +460,7 @@ This simulation demonstrates how credentials sent via `HTTP Basic Authentication
 
 ---
 
-<img width="1340" height="120" alt="dos drawio" src="https://github.com/user-attachments/assets/a181a451-a45f-4e51-a73b-d2e7e450c710" />
+<img width="1340" height="120" alt="dos drawio (1)" src="https://github.com/user-attachments/assets/cb4e3829-621b-40d9-956a-244480af1ead" />
 
 ## DoS ATTACK SIMULATION
 
