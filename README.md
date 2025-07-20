@@ -129,7 +129,7 @@ sudo systemctl status ssh
 ssh test@10.10.10.50
 ```
 
-<img width="731" height="446" alt="Lab 58" src="https://github.com/user-attachments/assets/e5e7fd90-0ce0-4ba9-861a-c02013bc4f04" /></br>
+<img width="731" height="400" alt="Lab 58" src="https://github.com/user-attachments/assets/465d6b8b-4e1c-46d4-be6c-a2c882faef10" /></br>
 
 - ### While connected, execute commands to generate traffic:
 ```bash
