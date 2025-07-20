@@ -514,11 +514,17 @@ sudo iftop -i enp0s3
 
 ### Step 3: Analyze the `Dos/DDos Attack` in Wireshark
 
-<img width="1472" height="781" alt="Lab 27" src="https://github.com/user-attachments/assets/d2f2c75e-0275-471c-8c60-84c719c7f316" />
+<img width="1472" height="781" alt="Lab 27" src="https://github.com/user-attachments/assets/d2f2c75e-0275-471c-8c60-84c719c7f316" /></br>
 
-The purpose of this simulated DoS/DDoS attack is to observe and analyze how excessive `ICMP` or UDP traffic affects a target system using tools like Wireshark and real-time network monitors. By flooding the victim VM (`10.10.10.50`) with continuous ping requests or spoofed UDP packets from the attacker VM (`10.10.10.100`), the simulation replicates the behavior of common denial-of-service attacks. This helps demonstrate how such attacks can overwhelm network bandwidth or system resources, allowing defenders to better recognize traffic patterns, CPU/network strain, and the importance of mitigation strategies in a controlled lab environment.
+The purpose of this simulated DoS/DDoS attack was to demonstrate how excessive `ICMP` traffic can overwhelm a target system and be identified using Wireshark and monitoring tools. In this setup, the attacker VM (`10.10.10.100`) flooded the victim VM (`10.10.10.50`) with high-speed ping requests using `ping -f`, simulating a basic `ICMP flood` attack. As a result, Wireshark recorded a total of `26,170` ICMP packets in `5 seconds`, consisting of both echo requests and replies. This volume of traffic visibly increased network and CPU load on the victim, effectively modeling how even a single host can disrupt service availability. The simulation allowed for real-time visibility into attack patterns and reinforced the importance of detecting early indicators of denial-of-service behavior.
 
 ---
+
+*This project demonstrates how to simulate and capture various real-world network security scenarios using `Wireshark`, including plaintext protocol leaks, encrypted communication, handshakes, tunneling, spoofing, and denial-of-service behaviors. Each simulation helps visualize how different attacks and protocol behaviors appear in packet captures, enhancing my skills in traffic analysis, threat detection, and network forensics.*
+
+**Created By:** `Briana Willis`  
+**Date:** `2025-07-20`  
+**Time:** `15:34 UTC`
 
 
 
