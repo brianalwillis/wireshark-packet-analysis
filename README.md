@@ -107,7 +107,7 @@ The Telnet session captured in Wireshark demonstrates the inherent insecurity of
 
 ## SSH TRAFFIC
 
-### Step 1: Configure the SSH Server (VM 2)
+### Step 1: Configure the SSH Server
 
 - ### On the server VM, install and verify the SSH service:
 ```bash
@@ -122,7 +122,7 @@ sudo systemctl status ssh
 
 ---
 
-### Step 2: Connect the SSH Client (VM 1)
+### Step 2: Connect the SSH Client
 
 - ### On the client VM, initiate an SSH session to the server:
 ```bash
@@ -157,7 +157,7 @@ When reviewing the SSH session in Wireshark, we observed that all communication 
 
 ## TLS/SSL HANDSHAKE
 
-### Step 1: Configure the TLS Server (VM 2)
+### Step 1: Configure the TLS Server
 
 - ### Install Apache and OpenSSL on the `Server VM`:
 ```bash
@@ -219,13 +219,13 @@ In our TLS/SSL handshake capture, we successfully observed the full negotiation 
 
 ### Step 1: Install the Required Tools
 
-- ### On both the `Client VM` and `Server VM`, install the necessary networking utilities:
+- ### On both the `Client` and `Server`, install the necessary networking utilities:
 ```bash
 sudo apt update
 sudo apt install netcat iputils-ping
 ```
 
-- ### For SYN scan testing, install `nmap` on the `Client VM`:
+- ### For SYN scan testing, install `nmap` on the `Client`:
 ```bash
 sudo apt install nmap
 ```
@@ -236,12 +236,12 @@ sudo apt install nmap
 
 ### Step 2: Simulate a Normal TCP 3-Way Handshake
 
-- ### On the `Server VM`, start a TCP listener on `port 1234` using `netcat`:
+- ### On the `Server`, start a TCP listener on `port 1234` using `netcat`:
 ```bash
 nc -l -p 1234
 ```
 
-- ### On the `Client VM`, connect to the server's open port:
+- ### On the `Client`, connect to the server's open port:
 ```bash
 nc 10.10.10.50 1234
 ```
@@ -250,7 +250,7 @@ nc 10.10.10.50 1234
 
 ### Step 3: Simulate Abnormal Behavior (SYN Scan)
 
-- ### From the `Client VM`, perform a `stealth SYN` scan targeting `port 1234` on the server:
+- ### From the `Client`, perform a `stealth SYN` scan targeting `port 1234` on the server:
 ```bash
 nmap -sS -p 1234 10.10.10.50
 ```
@@ -275,7 +275,7 @@ In contrast, the SYN scan test using `nmap -sS` demonstrated a half-open connect
 
 ## DNS TUNNELING
 
-### Step 1: Set up the `Client VM`
+### Step 1: Set up the `Client`
 
 - ### Install `dig` (DNS query tool):
 ```bash
@@ -312,7 +312,7 @@ During the simulation, Wireshark captured multiple DNS query packets originating
 
 ## ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK
 
-### Step 1: Set Up the `Client VM`
+### Step 1: Set Up the `Client`
 
 - ### Install the `dsniff` package:
 ```bash
@@ -356,7 +356,7 @@ The ARP spoofing was successful because the victim’s ARP cache was tricked int
 
 ## CREDENTIAL LEAKAGE
 
-### Step 1: Install and Configure `Apache` with Basic Authentication on the `Server VM`
+### Step 1: Install and Configure `Apache` with Basic Authentication on the `Server`
 
 - ### Update package lists and install Apache:
 ```bash
@@ -395,7 +395,7 @@ sudo systemctl reload apache2
 
 ---
 
-### Step 2: Install and Start FTP Server `VM 2` (Server)
+### Step 2: Install and Start FTP Server 
 
 - ### Install the `vsftpd` FTP server:
 ```bash
