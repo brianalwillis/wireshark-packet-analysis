@@ -433,7 +433,7 @@ curl --user test:8000 http://10.10.10.50/secure/
 
 - ### Connect to the FTP Server:
 ```bash
-curl --user test:8000 http://10.10.10.50/secure/
+ftp 10.10.10.50
 ```
 
 <img width="328" height="180" alt="Lab 32" src="https://github.com/user-attachments/assets/f3a741d9-13a7-4540-9b02-bdeb4a068543" />
