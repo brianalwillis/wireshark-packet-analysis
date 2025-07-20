@@ -159,7 +159,7 @@ When reviewing the SSH session in Wireshark, we observed that all communication 
 
 ### Step 1: Configure the TLS Server (VM 2)
 
-- ### Install Apache and OpenSSL on the server VM:
+- ### Install Apache and OpenSSL on the `Server VM`:
 ```bash
 sudo apt update
 sudo apt install apache2 openssl -y
@@ -190,7 +190,37 @@ sudo systemctl restart apache2
 
 ---
 
-Step
+### Step 2: Initiate a TLS Handshake from the Client
+
+- ### On the `Client VM`, trigger a handshake using `curl`:
+```bash
+curl -k https://10.10.10.50
+```
+
+<img width="725" height="605" alt="Lab 42" src="https://github.com/user-attachments/assets/ff87955b-535b-4ce3-ba86-dc63af27d66a" />
+
+---
+
+### Step 3: Analyze the TLS/SSL Handshake in Wireshark
+
+- ### Apply the display filter: `tls`
+
+<img width="1423" height="1131" alt="Lab 46" src="https://github.com/user-attachments/assets/2053c5ce-bd47-4188-9abc-b8c60fe8088f" /></br>
+
+<img width="1423" height="660" alt="Lab 45" src="https://github.com/user-attachments/assets/4b30b847-c0dd-49fc-9a13-eb6388573765" /></br>
+
+In our TLS/SSL handshake capture, we successfully observed the full negotiation process between the client and server. The session began with the `Client Hello` message, in which the client proposed `28` different `cipher suites`, indicating its supported encryption algorithms and TLS extensions. This was followed by the `Server Hello`, where the server selected the most compatible `cipher suite` and returned its SSL configuration details. Most notably, we captured the `Handshake Protocol: Certificate` message, which contained the server’s `X.509 certificate`, including the issuer, subject name, validity dates, and public key. The presence of these packets confirmed a complete and properly structured TLS handshake. This analysis helped illustrate how secure HTTPS communication is initialized and the role of certificates in establishing trust.
+
+---
+
+
+
+
+
+
+
+
+
 
 
 
