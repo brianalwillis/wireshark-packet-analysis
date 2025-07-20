@@ -102,6 +102,62 @@ The Telnet session captured in Wireshark demonstrates the inherent insecurity of
 
 ## SSH TRAFFIC
 
+### Step 1: Configure the SSH Server (on VM2)
+
+### On the server VM, install and verify the SSH service:
+```bash
+sudo apt update
+sudo apt install openssh-server
+sudo systemctl status ssh
+```
+
+<img width="725" height="289" alt="Lab 57" src="https://github.com/user-attachments/assets/d0c89cb6-5067-41f9-b534-057d1ea4392b" />
+
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 2: Connect the SSH Client 
+
+### On the client VM, initiate an SSH session to the server:
+```bash
+ssh test@10.10.10.50
+```
+
+<img width="731" height="446" alt="Lab 58" src="https://github.com/user-attachments/assets/e5e7fd90-0ce0-4ba9-861a-c02013bc4f04" /></br>
+
+### While connected, execute commands to generate traffic:
+```bash
+whoami
+uname -a
+ls -la
+uptime
+```
+
+<img width="726" height="559" alt="Lab 59" src="https://github.com/user-attachments/assets/98bb9cd3-c20a-4816-9aae-a94cd1ea563a" />
+
+---
+
+### Step 3: Analyze SSH Traffic in `Wireshark`
+
+- ### Apply the display filter: `tcp.port == 22`
+
+<img width="1454" height="596" alt="Lab 60" src="https://github.com/user-attachments/assets/4ba492fe-01f1-4365-a540-f6c1f27c75e1" />
+
+When reviewing the SSH session in Wireshark, we observed that all communication between the client and server was encrypted. Unlike `Telnet`, which transmits data (including usernames and passwords) in plaintext, `SSH` encapsulates all authentication and session data within encrypted packets, making it unreadable to observers. In the capture, the initial handshake involves key exchange and algorithm negotiation, followed by encrypted `TCP` segments on `port 22`. Even commands like `whoami` or `ls -la` and their responses are not visible in plaintext, showcasing SSH's effectiveness in providing secure remote access and protecting against eavesdropping.
+
+---
+
+
+
+
+
+
+
+
+
+
+
 
 
 
