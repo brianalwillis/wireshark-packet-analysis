@@ -213,6 +213,72 @@ In our TLS/SSL handshake capture, we successfully observed the full negotiation 
 
 ---
 
+## TCP 3-WAY HANDSHAKE
+
+### Step 1: Install the Required Tools
+
+- ### On both the `Client VM` and `Server VM`, install the necessary networking utilities:
+```bash
+sudo apt update
+sudo apt install netcat iputils-ping
+```
+
+- ### For SYN scan testing, install `nmap` on the `Client VM`:
+```bash
+sudo apt install nmap
+```
+
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 2: Simulate a Normal TCP 3-Way Handshake
+
+- ### On the `Server VM`, start a TCP listener on `port 1234` using `netcat`:
+```bash
+nc -l -p 1234
+```
+
+- ### On the Client VM, connect to the server's open port:
+```bash
+nc 10.10.10.50 1234
+```
+
+---
+
+### Step 3: Simulate Abnormal Behavior (SYN Scan)
+
+- ### From the `Client VM`, perform a `stealth SYN` scan targeting `port 1234` on the server:
+```bash
+nmap -sS -p 1234 10.10.10.50
+```
+
+---
+
+### Step 4: Analyze the `TCP 3-Way Handshake` and `SYN Scan` in Wireshark
+
+- ### Apply the display filter: `tcp.port == 1234`
+
+<img width="1423" height="203" alt="Lab 24" src="https://github.com/user-attachments/assets/d4b96623-db7b-491d-9237-ff689a0a6044" /></br>
+
+During the normal TCP 3-way handshake test, we observed the expected packet exchange pattern: the `client initiated a connection with a SYN packet`, the `server responded with SYN-ACK`, and the `client completed the handshake with an ACK`. This sequence confirms a fully established TCP session on `port 1234`, visible in Wireshark using the `tcp.port == 1234` filter.
+
+<img width="1204" height="55" alt="Lab 25" src="https://github.com/user-attachments/assets/2d5d6405-8cae-48f1-8457-1a370978650d" /></br>
+
+In contrast, the SYN scan test using `nmap -sS` demonstrated a half-open connection. The `client sent a SYN`, the `server replied with SYN-ACK`, but instead of completing the handshake, the `client responded with an immediate RST`. This is characteristic of stealth scanning techniques often used by attackers to detect open ports without fully establishing a connection.
+
+---
+
+
+
+
+
+
+
+
+
+
+
 
 
 
