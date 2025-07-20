@@ -25,7 +25,7 @@ This project involved the design and execution of a comprehensive series of netw
 
 ## 📜 TABLE OF CONTENTS
 
-- [TELNET TRAFFIC](#telnet-traffic)
+- [`TELNET TRAFFIC`](#telnet-traffic)
 - [SSH TRAFFIC](#ssh-traffic)
 - [TLS/SSL HANDSHAKE](#tlsssl-handshake)
 - [TCP 3-WAY HANDSHAKE](#tcp-3-way-handshake)
