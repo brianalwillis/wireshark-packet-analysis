@@ -102,7 +102,7 @@ The Telnet session captured in Wireshark demonstrates the inherent insecurity of
 
 ## SSH TRAFFIC
 
-### Step 1: Configure the SSH Server (on VM2)
+### Step 1: Configure the SSH Server (VM 2)
 
 ### On the server VM, install and verify the SSH service:
 ```bash
@@ -117,7 +117,7 @@ sudo systemctl status ssh
 
 ---
 
-### Step 2: Connect the SSH Client 
+### Step 2: Connect the SSH Client (VM 1)
 
 ### On the client VM, initiate an SSH session to the server:
 ```bash
