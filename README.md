@@ -460,6 +460,65 @@ This simulation demonstrates how credentials sent via `HTTP Basic Authentication
 
 ---
 
+## DOS/DDOS ATTACK SIMULATION
+
+### Step 1: Install Network Utilities and Monitoring Tools
+
+- ### Install tools and Wireshark on both VMs:
+```bash
+sudo apt update
+sudo apt install iputils-ping hping3 wireshark -y
+```
+
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 2: Execute a Fast Flood Ping Attack
+
+- ### From the Client, execute this command to the Server:
+```bash
+sudo ping -f 10.10.10.50
+```
+
+<img width="725" height="123" alt="Lab 26" src="https://github.com/user-attachments/assets/0cb6f93c-6ecd-41f7-b5a7-2f7e01e2d312" />
+
+---
+
+### Step 3: Monitor System and Network Resource Usage During Simulated Attack
+
+- ### Use `top` to launch a real-time system monitoring showing CPU, memory, and process usage:
+```bash
+top
+```
+
+<img width="719" height="505" alt="Lab 28" src="https://github.com/user-attachments/assets/19c880e8-e899-461c-8f5e-c1197c5b7a0d" />
+
+- ### Install and use `iftop` to monitor bandwidth usage:
+```bash
+sudo apt install iftop
+sudo iftop -i enp0s3
+```
+
+<img width="725" height="506" alt="Lab 29" src="https://github.com/user-attachments/assets/50338e51-18bb-478d-8775-d5673e3e4458" />
+
+- ### Install and use `nload` to monitor incoming/outgoing traffic:
+```bash
+sudo apt install iftop
+sudo iftop -i enp0s3
+```
+
+<img width="723" height="506" alt="Lab 30" src="https://github.com/user-attachments/assets/d726ad5d-0fde-4bea-8229-6e1e3ba12528" />
+
+---
+
+### Step 3: Analyze the `Dos/DDos Attack` in Wireshark
+
+<img width="1472" height="781" alt="Lab 27" src="https://github.com/user-attachments/assets/d2f2c75e-0275-471c-8c60-84c719c7f316" />
+
+The purpose of this simulated DoS/DDoS attack is to observe and analyze how excessive `ICMP` or UDP traffic affects a target system using tools like Wireshark and real-time network monitors. By flooding the victim VM (`10.10.10.50`) with continuous ping requests or spoofed UDP packets from the attacker VM (`10.10.10.100`), the simulation replicates the behavior of common denial-of-service attacks. This helps demonstrate how such attacks can overwhelm network bandwidth or system resources, allowing defenders to better recognize traffic patterns, CPU/network strain, and the importance of mitigation strategies in a controlled lab environment.
+
+---
 
 
 
