@@ -15,9 +15,13 @@
 - [`Ubuntu 22.04:`](https://releases.ubuntu.com/jammy/)</br>
   Deployed on two separate virtual machines—one configured as the attacker/client and the other as the server/analyzer.
 
+---
+
 ## OBJECTIVE
 
 This project involved the design and execution of a comprehensive series of network security simulations using `Wireshark` in a controlled virtual lab environment. Leveraging `VirtualBox` and multiple `Linux` virtual machines, I captured and analyzed network traffic across a variety of protocols to simulate both normal and malicious behavior. Key scenarios included `TCP handshakes`, `SYN scans`, `DNS tunneling`, `ARP spoofing`, `credential leakage` via HTTP and FTP, `Telnet/SSH` sessions, `TLS/SSL handshakes`, and `DoS/DDoS` indicators. Each simulation was crafted to mirror real-world attack patterns or defensive monitoring tasks, providing deep insights into packet-level behavior, protocol vulnerabilities, and network-based threat detection techniques. This project demonstrated hands-on proficiency in packet analysis, threat simulation, and network forensic workflows.
+
+---
 
 ## 📜 TABLE OF CONTENTS
 
@@ -30,7 +34,8 @@ This project involved the design and execution of a comprehensive series of netw
 - [`CREDENTIAL LEAKAGE`](credential-leakage)
 - [`DOS/DDOS ATTACK SIMULATION`](dosddos-attack-simulation)
 
-</br>
+---
+
 <img width="1340" height="120" alt="telnet drawio (1)" src="https://github.com/user-attachments/assets/0cdb9c57-472a-4f01-a4e1-3496894d7533" />
 
 ## TELNET TRAFFIC
@@ -104,7 +109,7 @@ The Telnet session captured in Wireshark demonstrates the inherent insecurity of
 
 ### Step 1: Configure the SSH Server (VM 2)
 
-### On the server VM, install and verify the SSH service:
+- ### On the server VM, install and verify the SSH service:
 ```bash
 sudo apt update
 sudo apt install openssh-server
@@ -119,14 +124,14 @@ sudo systemctl status ssh
 
 ### Step 2: Connect the SSH Client (VM 1)
 
-### On the client VM, initiate an SSH session to the server:
+- ### On the client VM, initiate an SSH session to the server:
 ```bash
 ssh test@10.10.10.50
 ```
 
 <img width="731" height="446" alt="Lab 58" src="https://github.com/user-attachments/assets/e5e7fd90-0ce0-4ba9-861a-c02013bc4f04" /></br>
 
-### While connected, execute commands to generate traffic:
+- ### While connected, execute commands to generate traffic:
 ```bash
 whoami
 uname -a
@@ -142,11 +147,52 @@ uptime
 
 - ### Apply the display filter: `tcp.port == 22`
 
-<img width="1454" height="596" alt="Lab 60" src="https://github.com/user-attachments/assets/4ba492fe-01f1-4365-a540-f6c1f27c75e1" />
+<img width="1454" height="596" alt="Lab 60" src="https://github.com/user-attachments/assets/4ba492fe-01f1-4365-a540-f6c1f27c75e1" /></br>
 
 When reviewing the SSH session in Wireshark, we observed that all communication between the client and server was encrypted. Unlike `Telnet`, which transmits data (including usernames and passwords) in plaintext, `SSH` encapsulates all authentication and session data within encrypted packets, making it unreadable to observers. In the capture, the initial handshake involves key exchange and algorithm negotiation, followed by encrypted `TCP` segments on `port 22`. Even commands like `whoami` or `ls -la` and their responses are not visible in plaintext, showcasing SSH's effectiveness in providing secure remote access and protecting against eavesdropping.
 
 ---
+
+<img width="1340" height="120" alt="tls drawio" src="https://github.com/user-attachments/assets/cd918ab4-1bfd-4ff4-9f87-feac85a9e472" />
+
+## TLS/SSL HANDSHAKE
+
+### Step 1: Configure the TLS Server (VM 2)
+
+- ### Install Apache and OpenSSL on the server VM:
+```bash
+sudo apt update
+sudo apt install apache2 openssl -y
+```
+
+- ### Enable SSL support and generate a self-signed TLS certification:
+```bash
+sudo a2enmod ssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/private/apache-selfsigned.key \
+  -out /etc/ssl/certs/apache-selfsigned.crt
+```
+
+- ### Create and apply a basic HTTPS configuration for Apache:
+```bash
+sudo nano /etc/apache2/sites-available/default-ssl.conf
+```
+
+- ### Enable the SSL Site and restart Apache:
+```bash
+sudo a2ensite default-ssl
+sudo systemctl restart apache2
+```
+
+<img width="556" height="147" alt="Lab 41" src="https://github.com/user-attachments/assets/80fd51dd-03cd-411d-bafe-d0ecc3519b32" /></br>
+
+### *At the point, the server was configured to accept HTTPS connections on port 443. Start `Wireshark` and begin capturing on `enp0s3`.*
+
+---
+
+Step
+
+
 
 
 
