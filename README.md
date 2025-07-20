@@ -352,6 +352,8 @@ The ARP spoofing was successful because the victim’s ARP cache was tricked int
 
 ---
 
+<img width="1340" height="120" alt="credential drawio" src="https://github.com/user-attachments/assets/5753e531-b6d9-41ee-987b-846883affea1" />
+
 ## CREDENTIAL LEAKAGE
 
 ### Step 1: Install and Configure `Apache` with Basic Authentication on the `Server VM`
@@ -454,7 +456,7 @@ ftp 10.10.10.50
 
 <img width="945" height="357" alt="Lab 37" src="https://github.com/user-attachments/assets/ab4d44df-aedd-4ad8-9ce7-afbdc2881bce" /></br>
 
-This simulation demonstrates how credentials sent via `HTTP Basic Authentication` and `FTP` are transmitted in plaintext (or easily decoded) over the network, making them vulnerable to interception. Capturing this traffic with Wireshark clearly shows usernames and passwords, highlighting the need for secure protocols such as HTTPS and SFTP.
+This simulation demonstrates how credentials sent via `HTTP Basic Authentication` and `FTP` are transmitted in plaintext (or easily decoded) over the network, making them vulnerable to interception. Capturing this traffic with Wireshark clearly shows usernames and passwords, highlighting the need for secure protocols such as `HTTPS` and `SFTP`.
 
 ---
 
