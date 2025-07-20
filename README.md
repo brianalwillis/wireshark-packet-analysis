@@ -12,7 +12,7 @@
 - `VirtualBox:`</br>
   Hosted multiple isolated virtual machines for safely simulating real-world networking environments and security attacks.
 
-- `Ubuntu VMs:`</br>
+- `Ubuntu VM:`</br>
   Deployed as both attacker and victim nodes. Used to simulate a wide range of network activity.
 
 ## OBJECTIVE
